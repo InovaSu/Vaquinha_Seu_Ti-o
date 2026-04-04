@@ -38,7 +38,7 @@ def carregar_dados():
             "arrecadado": 0.0,
             "pix": "31971122325",
             "mensagem": "Toda ajuda faz diferença. Muito obrigada!",
-            "foto_url": "foto_url": "https://i.postimg.cc/RFkBtwST/shared-image-(4).jpg"
+            "foto_url": "https://i.postimg.cc/RFkBtwST/shared-image-(4).jpg"
         }
         salvar_dados(dados_iniciais)
         return dados_iniciais
