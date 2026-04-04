@@ -37,13 +37,19 @@ def carregar_dados():
             "meta": 15000.0,
             "arrecadado": 0.0,
             "pix": "31971122325",
-            "mensagem": "Toda ajuda faz diferença. Muito obrigada!"
+            "mensagem": "Toda ajuda faz diferença. Muito obrigada!",
+            "foto_url": "foto_url": "https://i.postimg.cc/RFkBtwST/shared-image-(4).jpg"
         }
         salvar_dados(dados_iniciais)
         return dados_iniciais
 
     with open(DATA_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+        dados = json.load(f)
+
+    if "foto_url" not in dados:
+        dados["foto_url"] = ""
+
+    return dados
 
 
 def salvar_dados(dados):
@@ -88,6 +94,17 @@ PUBLIC_TEMPLATE = """
             border-radius: 20px;
             padding: 28px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+        .foto-box {
+            margin-bottom: 22px;
+        }
+        .foto-box img {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1px solid #2b2b2b;
+            display: block;
         }
         h1 {
             margin-top: 0;
@@ -162,6 +179,12 @@ PUBLIC_TEMPLATE = """
 </head>
 <body>
     <div class="card">
+        {% if dados.foto_url %}
+        <div class="foto-box">
+            <img src="{{ dados.foto_url }}" alt="Foto do Seu Tião">
+        </div>
+        {% endif %}
+
         <h1>{{ dados.titulo }}</h1>
         <p>{{ dados.descricao }}</p>
 
@@ -332,6 +355,9 @@ ADMIN_TEMPLATE = """
             <label>Mensagem</label>
             <textarea name="mensagem" required>{{ dados.mensagem }}</textarea>
 
+            <label>Link da foto</label>
+            <input type="text" name="foto_url" value="{{ dados.foto_url }}" placeholder="Cole aqui o link direto da foto">
+
             <button type="submit">Salvar alterações</button>
         </form>
 
@@ -389,6 +415,7 @@ def admin():
         dados["arrecadado"] = parse_moeda_brasileira(request.form.get("arrecadado", 0))
         dados["pix"] = request.form.get("pix", "").strip()
         dados["mensagem"] = request.form.get("mensagem", "").strip()
+        dados["foto_url"] = request.form.get("foto_url", "").strip()
         salvar_dados(dados)
         flash("Alterações salvas com sucesso.")
         return redirect(url_for("admin"))
