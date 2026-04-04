@@ -33,11 +33,11 @@ def carregar_dados():
     if not os.path.exists(DATA_FILE):
         dados_iniciais = {
             "titulo": "Vaquinha solidária",
-            "descricao": "Estamos arrecadando para ajudar em uma causa importante.",
+            "descricao": "Olá! Meu nome é Suellen Almeida e esta vaquinha foi criada para ajudar meu pai, mais conhecido como Seu Tião, que tem HBP (hiperplasia benigna da próstata) e precisará fazer uma cirurgia com urgência no mês de maio, assim que concluir a recuperação da anemia que desenvolveu após perder muito sangue recentemente. Estamos arrecadando ajuda para cobrir o procedimento RTU/Prostatectomia Simples, orçado em R$ 15.000,00 pelo urologista que vem acompanhando o caso dele. Qualquer valor faz diferença. Agradeço pelas orações e peço que continuem compartilhando o link da vaquinha. Deus abençoe!",
             "meta": 15000.0,
             "arrecadado": 0.0,
             "pix": "seu-pix-aqui",
-            "mensagem": "Qualquer ajuda faz diferença. Obrigada por contribuir."
+            "mensagem": "Toda ajuda faz diferença. Muito obrigada!"
         }
         salvar_dados(dados_iniciais)
         return dados_iniciais
