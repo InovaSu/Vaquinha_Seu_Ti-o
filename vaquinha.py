@@ -98,14 +98,16 @@ PUBLIC_TEMPLATE = """
         .foto-box {
             margin-bottom: 22px;
         }
-        .foto-box img {
+       .foto-box img {
             width: 100%;
-            max-height: 380px;
-            object-fit: cover;
+            max-height: 300px;
+            object-fit: contain;
             border-radius: 16px;
             border: 1px solid #2b2b2b;
             display: block;
+            background: #111111;
         }
+        
         h1 {
             margin-top: 0;
             font-size: 2rem;
@@ -202,7 +204,7 @@ PUBLIC_TEMPLATE = """
             <div class="pix-chave">{{ dados.pix }}</div>
         </div>
 
-        <div class="rodape">Você também pode ajudar compartilhando esta página.</div>
+        <div class="rodape">Você também pode nos ajudar compartilhando esta página.</div>
     </div>
 </body>
 </html>
