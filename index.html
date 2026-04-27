@@ -16,6 +16,8 @@
       --line: #2e2e30;
       --accent: #39b36e;
       --accent-2: #208952;
+      --blue: #2563eb;
+      --warm: #f3c969;
     }
 
     * {
@@ -40,25 +42,28 @@
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 22px;
+      padding: 24px;
       box-shadow: 0 18px 55px rgba(0, 0, 0, 0.42);
     }
 
     .photo {
-      min-height: 224px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: var(--panel-2);
+      width: min(100%, 155px);
+      aspect-ratio: 9 / 16;
+      border: 2px solid rgba(57, 179, 110, 0.55);
+      border-radius: 12px;
+      background: #0f0f10;
       display: grid;
       place-items: center;
       overflow: hidden;
-      margin-bottom: 16px;
+      margin: 0 auto 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
     }
 
     .photo img {
       width: 100%;
-      max-width: 190px;
-      height: auto;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
       display: block;
     }
 
@@ -70,10 +75,10 @@
     }
 
     h1 {
-      font-size: clamp(24px, 5vw, 30px);
+      font-size: clamp(24px, 4.4vw, 30px);
       line-height: 1.15;
       text-align: center;
-      margin: 0 0 16px;
+      margin: 0 0 8px;
     }
 
     p {
@@ -81,18 +86,48 @@
       font-size: 15px;
     }
 
+    .summary {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 10px;
+      margin: 20px 0 14px;
+    }
+
     .amount {
-      text-align: center;
-      margin: 18px 0 12px;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
     }
 
     .amount strong {
       display: block;
-      font-size: 31px;
+      font-size: 28px;
       line-height: 1.1;
     }
 
     .amount span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .meta-box {
+      background: rgba(243, 201, 105, 0.08);
+      border: 1px solid rgba(243, 201, 105, 0.3);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .meta-box strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .meta-box span {
       color: var(--muted);
       font-size: 14px;
     }
@@ -102,7 +137,7 @@
       background: #303030;
       border-radius: 999px;
       overflow: hidden;
-      margin: 14px 0 20px;
+      margin: 10px 0 22px;
     }
 
     .progress div {
@@ -111,11 +146,27 @@
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
     }
 
+    .story {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0 6px;
+      margin: 0 0 16px;
+    }
+
+    .trust {
+      background: rgba(37, 99, 235, 0.1);
+      border-left: 4px solid var(--blue);
+      border-radius: 8px;
+      color: #e8edf5;
+      padding: 12px 14px;
+      margin: 0 0 16px;
+    }
+
     .pix-box {
-      border: 1px dashed #565656;
+      border: 1px dashed rgba(57, 179, 110, 0.75);
       border-radius: 10px;
       padding: 14px;
-      margin: 14px 0 16px;
+      margin: 14px 0 12px;
       background: #111;
     }
 
@@ -134,7 +185,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-top: 14px;
+      margin-top: 12px;
     }
 
     button,
@@ -153,7 +204,7 @@
     }
 
     a.button {
-      background: #2563eb;
+      background: var(--blue);
     }
 
     .note {
@@ -176,6 +227,18 @@
       .actions {
         grid-template-columns: 1fr;
       }
+
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .photo {
+        width: min(100%, 145px);
+      }
     }
   </style>
 </head>
@@ -188,22 +251,34 @@
 
     <h1>Vaquinha - Cirurgia Seu Tião</h1>
 
-    <p>Olá! Meu nome é Suellen Santos Alves de Almeida e esta vaquinha foi criada para ajudar meu pai, mais conhecido como Seu Tião, que tem HBP, hiperplasia benigna da próstata, e precisará fazer uma cirurgia com urgência em maio de 2026.</p>
-
-    <p>Assim que concluir a recuperação da anemia que desenvolveu após perder muito sangue recentemente, ele fará o procedimento RTU/Prostatectomia simples, orçado em R$ 15.000,00 pelo urologista que vem acompanhando o caso.</p>
-
-    <p>Qualquer valor faz diferença. Agradeço pelas orações e peço que continuem compartilhando o link da vaquinha. Deus abençoe!</p>
-
-    <section class="amount" aria-label="Valor arrecadado">
-      <strong id="raisedAmount">R$ 0,00</strong>
-      <span id="goalAmount">Meta: R$ 15.000,00</span>
+    <section class="summary" aria-label="Resumo da arrecadação">
+      <div class="amount">
+        <span>Arrecadado até agora</span>
+        <strong id="raisedAmount">R$ 0,00</strong>
+      </div>
+      <div class="meta-box">
+        <span>Meta</span>
+        <strong id="goalAmount">R$ 15.000,00</strong>
+      </div>
     </section>
 
     <div class="progress" aria-label="Progresso da arrecadação">
       <div id="progressFill"></div>
     </div>
 
-    <p><strong>Toda ajuda faz diferença. Muito obrigada!</strong></p>
+    <section class="story">
+      <p>Olá! Meu nome é Suellen Santos Alves de Almeida e criei esta vaquinha para ajudar meu pai, conhecido carinhosamente como Seu Tião.</p>
+
+      <p>Ele tem HBP, hiperplasia benigna da próstata, e precisará passar por uma cirurgia com urgência em maio de 2026. Antes do procedimento, ele está se recuperando de uma anemia causada por uma perda recente de sangue.</p>
+
+      <p>A cirurgia indicada pelo urologista que acompanha o caso é uma RTU/Prostatectomia simples, com custo estimado em R$ 15.000,00.</p>
+
+      <p>Qualquer contribuição, de qualquer valor, fará muita diferença para nós. Também agradecemos muito a quem puder ajudar compartilhando esta vaquinha e mantendo meu pai em suas orações.</p>
+
+      <p>Que Deus abençoe cada um de vocês.</p>
+    </section>
+
+    <p class="trust">Todo valor recebido será usado para custear o procedimento e os cuidados relacionados à cirurgia.</p>
 
     <div class="pix-box">
       <small>Chave Pix para contribuir</small>
@@ -211,15 +286,15 @@
     </div>
 
     <div class="actions">
-      <button type="button" id="copyPix">Copiar Pix</button>
-      <a class="button" id="shareWhatsApp" target="_blank" rel="noopener">Compartilhar</a>
+      <button type="button" id="copyPix">Contribuir via Pix</button>
+      <a class="button" id="shareWhatsApp" target="_blank" rel="noopener">Compartilhar no WhatsApp</a>
     </div>
 
     <p class="note">Você também pode ajudar compartilhando esta página.</p>
   </main>
 
   <script>
-    const valorArrecadado = 3000;
+    const valorArrecadado = 100;
     const meta = 15000;
 
     const pixKey = document.getElementById("pixKey").textContent.trim();
@@ -235,7 +310,7 @@
     });
 
     raisedAmount.textContent = currency.format(valorArrecadado);
-    goalAmount.textContent = `Meta: ${currency.format(meta)}`;
+    goalAmount.textContent = currency.format(meta);
     progressFill.style.width = `${Math.min((valorArrecadado / meta) * 100, 100)}%`;
 
     const message = [
@@ -253,7 +328,7 @@
         await navigator.clipboard.writeText(pixKey);
         copyButton.textContent = "Pix copiado";
         setTimeout(() => {
-          copyButton.textContent = "Copiar Pix";
+          copyButton.textContent = "Contribuir via Pix";
         }, 1800);
       } catch {
         alert(`Chave Pix: ${pixKey}`);
