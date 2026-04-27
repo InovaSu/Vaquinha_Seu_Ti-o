@@ -106,7 +106,7 @@
     }
 
     .progress div {
-      width: 1%;
+      width: 0%;
       height: 100%;
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
     }
@@ -195,12 +195,12 @@
     <p>Qualquer valor faz diferença. Agradeço pelas orações e peço que continuem compartilhando o link da vaquinha. Deus abençoe!</p>
 
     <section class="amount" aria-label="Valor arrecadado">
-      <strong>R$ 100,00</strong>
-      <span>Meta: R$ 15.000,00</span>
+      <strong id="raisedAmount">R$ 0,00</strong>
+      <span id="goalAmount">Meta: R$ 15.000,00</span>
     </section>
 
     <div class="progress" aria-label="Progresso da arrecadação">
-      <div></div>
+      <div id="progressFill"></div>
     </div>
 
     <p><strong>Toda ajuda faz diferença. Muito obrigada!</strong></p>
@@ -219,13 +219,29 @@
   </main>
 
   <script>
+    const valorArrecadado = 100;
+    const meta = 15000;
+
     const pixKey = document.getElementById("pixKey").textContent.trim();
     const copyButton = document.getElementById("copyPix");
     const shareLink = document.getElementById("shareWhatsApp");
+    const raisedAmount = document.getElementById("raisedAmount");
+    const goalAmount = document.getElementById("goalAmount");
+    const progressFill = document.getElementById("progressFill");
+
+    const currency = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    });
+
+    raisedAmount.textContent = currency.format(valorArrecadado);
+    goalAmount.textContent = `Meta: ${currency.format(meta)}`;
+    progressFill.style.width = `${Math.min((valorArrecadado / meta) * 100, 100)}%`;
 
     const message = [
       "Oi! Estou compartilhando a vaquinha para ajudar na cirurgia do Seu Tião.",
-      "Meta: R$ 15.000,00.",
+      `Arrecadado: ${currency.format(valorArrecadado)}.`,
+      `Meta: ${currency.format(meta)}.`,
       `Chave Pix: ${pixKey}`,
       window.location.href
     ].join("%0A");
