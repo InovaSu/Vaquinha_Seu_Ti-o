@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vaquinha - Cirurgia Seu Tião</title>
+  <meta name="description" content="Vaquinha para ajudar na cirurgia do Seu Tião.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0b0c;
+      --panel: #151515;
+      --panel-2: #101010;
+      --text: #ffffff;
+      --muted: #b6bcc7;
+      --line: #2e2e30;
+      --accent: #39b36e;
+      --accent-2: #208952;
+      --blue: #2563eb;
+      --warm: #f3c969;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #191919 0, var(--bg) 42%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    main {
+      width: min(100%, 540px);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.42);
+    }
+
+    .photo {
+      width: min(100%, 155px);
+      aspect-ratio: 9 / 16;
+      border: 2px solid rgba(57, 179, 110, 0.55);
+      border-radius: 12px;
+      background: #0f0f10;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      margin: 0 auto 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+
+    .photo span {
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+      padding: 18px;
+    }
+
+    h1 {
+      font-size: clamp(24px, 4.4vw, 30px);
+      line-height: 1.15;
+      text-align: center;
+      margin: 0 0 8px;
+    }
+
+    p {
+      margin: 0 0 14px;
+      font-size: 15px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 10px;
+      margin: 20px 0 14px;
+    }
+
+    .amount {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .amount strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1.1;
+    }
+
+    .amount span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .meta-box {
+      background: rgba(243, 201, 105, 0.08);
+      border: 1px solid rgba(243, 201, 105, 0.3);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .meta-box strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .meta-box span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .progress {
+      height: 14px;
+      background: #303030;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 10px 0 22px;
+    }
+
+    .progress div {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    .story {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0 6px;
+      margin: 0 0 16px;
+    }
+
+    .trust {
+      background: rgba(37, 99, 235, 0.1);
+      border-left: 4px solid var(--blue);
+      border-radius: 8px;
+      color: #e8edf5;
+      padding: 12px 14px;
+      margin: 0 0 16px;
+    }
+
+    .pix-box {
+      border: 1px dashed rgba(57, 179, 110, 0.75);
+      border-radius: 10px;
+      padding: 14px;
+      margin: 14px 0 12px;
+      background: #111;
+    }
+
+    .pix-box small {
+      color: var(--muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .pix-key {
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    button,
+    a.button {
+      appearance: none;
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #ffffff;
+      background: var(--accent-2);
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    a.button {
+      background: var(--blue);
+    }
+
+    .note {
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 460px) {
+      body {
+        padding: 14px;
+        align-items: flex-start;
+      }
+
+      main {
+        padding: 18px;
+      }
+
+      .actions {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .photo {
+        width: min(100%, 145px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="photo">
+      <img src="foto-pai.jpg" alt="Foto do Seu Tião" onerror="this.remove(); document.getElementById('photoHint').hidden = false;">
+      <span id="photoHint" hidden>Não foi possível carregar a foto. Verifique se ela está na mesma pasta com o nome <strong>foto-pai.jpg</strong>.</span>
+    </div>
+
+    <h1>Vaquinha - Cirurgia Seu Tião</h1>
+
+    <section class="summary" aria-label="Resumo da arrecadação">
+      <div class="amount">
+        <span>Arrecadado até agora</span>
+        <strong id="raisedAmount">R$ 0,00</strong>
+      </div>
+      <div class="meta-box">
+        <span>Meta</span>
+        <strong id="goalAmount">R$ 15.000,00</strong>
+      </div>
+    </section>
+
+    <div class="progress" aria-label="Progresso da arrecadação">
+      <div id="progressFill"></div>
+    </div>
+
+    <section class="story">
+      <p>Olá! Meu nome é Suellen Santos Alves de Almeida e criei esta vaquinha para ajudar meu pai, conhecido carinhosamente como Seu Tião.</p>
+
+      <p>Ele tem HBP, hiperplasia benigna da próstata, e precisará passar por uma cirurgia com urgência em maio de 2026. Antes do procedimento, ele está se recuperando de uma anemia causada por uma perda recente de sangue.</p>
+
+      <p>A cirurgia indicada pelo urologista que acompanha o caso é uma RTU/Prostatectomia simples, com custo estimado em R$ 15.000,00.</p>
+
+      <p>Qualquer contribuição, de qualquer valor, fará muita diferença para nós. Também agradecemos muito a quem puder ajudar compartilhando esta vaquinha e mantendo meu pai em suas orações.</p>
+
+      <p>Que Deus abençoe cada um de vocês.</p>
+    </section>
+
+    <p class="trust">Todo valor recebido será usado para custear o procedimento e os cuidados relacionados à cirurgia.</p>
+
+    <div class="pix-box">
+      <small>Chave Pix para contribuir</small>
+      <div class="pix-key" id="pixKey">31971122325</div>
+    </div>
+
+    <div class="actions">
+      <button type="button" id="copyPix">Contribuir via Pix</button>
+      <a class="button" id="shareWhatsApp" target="_blank" rel="noopener">Compartilhar no WhatsApp</a>
+    </div>
+
+    <p class="note">Você também pode ajudar compartilhando esta página.</p>
+  </main>
+
+  <script>
+    const valorArrecadado = 100;
+    const meta = 15000;
+
+    const pixKey = document.getElementById("pixKey").textContent.trim();
+    const copyButton = document.getElementById("copyPix");
+    const shareLink = document.getElementById("shareWhatsApp");
+    const raisedAmount = document.getElementById("raisedAmount");
+    const goalAmount = document.getElementById("goalAmount");
+    const progressFill = document.getElementById("progressFill");
+
+    const currency = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    });
+
+    raisedAmount.textContent = currency.format(valorArrecadado);
+    goalAmount.textContent = currency.format(meta);
+    progressFill.style.width = `${Math.min((valorArrecadado / meta) * 100, 100)}%`;
+
+    const message = [
+      "Oi! Estou compartilhando a vaquinha para ajudar na cirurgia do Seu Tião.",
+      `Arrecadado: ${currency.format(valorArrecadado)}.`,
+      `Meta: ${currency.format(meta)}.`,
+      `Chave Pix: ${pixKey}`,
+      window.location.href
+    ].join("%0A");
+
+    shareLink.href = `https://wa.me/?text=${message}`;
+
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(pixKey);
+        copyButton.textContent = "Pix copiado";
+        setTimeout(() => {
+          copyButton.textContent = "Contribuir via Pix";
+        }, 1800);
+      } catch {
+        alert(`Chave Pix: ${pixKey}`);
+      }
+    });
+  </script>
+</body>
+</html>
